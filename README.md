@@ -1,4 +1,3 @@
 # Getting Cleaning Data
-## Eugene Kim
-## Assignment README.md
+## by Eugene Kim
 GettingCleaningDataAssignment
