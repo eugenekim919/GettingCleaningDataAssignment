@@ -91,5 +91,7 @@ selected_measurements_summary <- selected_measurements_summary %>% summarize_all
 # Rename names of summarized variables with a suffix of "-MEAN"
 names(selected_measurements_summary)[4:69] <- paste(names(selected_measurements_summary[4:69]), "-MEAN", sep = "")
 
-# View final tidy dataset
+# View and output final tidy dataset
 View(selected_measurements_summary)
+
+write.table(selected_measurements_summary, file = "tidy_dataset.txt", row.names = FALSE, sep = "|")

@@ -23,3 +23,4 @@ This repo contains the following files:
 3. The final output will create the following:
 	- A data frame `selected_measurements` that contains the activity, subject id, and all variables that contain the mean or standard deviation
 	- A data frame `selected_measurements_summary` that contains a tidy dataset that summarizes the `selected_measurements` data frame by activtiy and subject id with the averages of the remaining variables
+	- A file named `tidy_dataset.txt` with a pipe (|) delimiter of `selected_measurements_summary`.
