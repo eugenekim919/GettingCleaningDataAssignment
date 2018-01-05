@@ -1,12 +1,12 @@
 # Eugene Kim
 # Getting and cleaning data
-# Week 3 
+# Week 3 Assignment
 
 # Additional information can be found here:
 # http://archive.ics.uci.edu/ml/datasets/Smartphone-Based+Recognition+of+Human+Activities+and+Postural+Transitions
 
 ## Pre-work
-## Set the working directory to the UCI HAR Dataset folder from the zip file located:
+## Download and set the working directory to the UCI HAR Dataset folder from the zip file located:
 ## https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 library("tidyr")
