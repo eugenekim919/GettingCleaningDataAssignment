@@ -41,15 +41,11 @@ The following objects (with descriptions) are created in the `run_analysis.R' sc
 
 -`X_train`: contains the variables for the test population
 
--`selected_measurements`: contains the activity, subject id, and all variables that contain the mean or standard deviation
-
--`selected_measurements_summary`: contains a tidy dataset that summarizes the `selected_measurements` data frame by activtiy and subject id with the averages of the remaining variables
-
 ## Tidying data steps
 1. Ingests all of the files above.
 2. Create a combined data frame of test and training data called `training_test_combined` with the activity id and subject id.
 3. Trim `training_test_combined` with only the variables that pertain to mean and standard deviation.  Add the activity description.
-4. Group the data set by activity and subject id then create the final tidy dataset with the averages of the variables into `selected_measurements_summary`.
+4. Group and melt the data set by activity and subject id then create the final tidy dataset with the averages of the variables into `tidy_measurements`.
 
 
 

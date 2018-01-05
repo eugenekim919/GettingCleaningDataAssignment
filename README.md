@@ -21,6 +21,5 @@ This repo contains the following files:
 1. Download the `UCI HAR.zip` file and extract to a folder.
 2. Run the `run_analysis.R` script after setting the working directory to the folder in step 1
 3. The final output will create the following:
-	- A data frame `selected_measurements` that contains the activity, subject id, and all variables that contain the mean or standard deviation
-	- A data frame `selected_measurements_summary` that contains a tidy dataset that summarizes the `selected_measurements` data frame by activtiy and subject id with the averages of the remaining variables
+	- A data frame `tidy_measurements` that contains a tidy dataset that summarizes the `tidy_measurements` data frame by activtiy and subject id with the averages of the remaining variables
 	- A file named `tidy_dataset.txt` with a pipe (|) delimiter of `selected_measurements_summary`.

@@ -11,6 +11,7 @@
 
 library("tidyr")
 library("dplyr")
+library("reshape2")
 
 # Get activity labels from csv file
 activity_labels <- read.csv("./activity_labels.txt", sep = " ", header = FALSE)
@@ -67,31 +68,42 @@ training_test_combined <- rbind(cbind(subject_train, y_train, X_train),
 
 # Step 2
 # Extracts only the measurements on the mean and standard deviation for each measurement.
-selected_measurements <- select(training_test_combined, 1, 2, contains("-mean()-"), contains("-std()-"), "data_source")
+selected_measurements_mean <- select(training_test_combined, 1, 2, contains("-mean()-"), "data_source")
+selected_measurements_mean <- cbind(selected_measurements_mean, measurement="mean")
+
+selected_measurements_std <- select(training_test_combined, 1, 2, contains("-std()-"), "data_source")
+selected_measurements_std <- cbind(selected_measurements_std, measurement="std")
 
 # Step 3
 # Uses descriptive activity names to name the activities in the data set
-selected_measurements <- inner_join(selected_measurements, activity_labels)
+selected_measurements_mean <- inner_join(selected_measurements_mean, activity_labels)
+selected_measurements_std <- inner_join(selected_measurements_std, activity_labels)
 
 # Step 4
 # Appropriately labels the data set with descriptive variable names.
-
-# Already performed earlier in line 37 and 54
-# names(selected_measurements)
+# Already performed earlier
 
 # Step 5
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 # Set the group by criteria for activity and subject id
-selected_measurements_summary <- selected_measurements %>% group_by(activity, subject_id) %>% select(-data_source)
+selected_measurements_mean_summary <- selected_measurements_mean %>% group_by(activity, subject_id, measurement) %>% select(-data_source)
+selected_measurements_std_summary <- selected_measurements_std %>% group_by(activity, subject_id, measurement) %>% select(-data_source)
 
 # Summarize with the mean for all other non-grouped variables
-selected_measurements_summary <- selected_measurements_summary %>% summarize_all(funs(mean)) %>% select(c(2,3,1,4:69))
+selected_measurements_mean_summary <- selected_measurements_mean_summary %>% summarize_all(funs(mean)) %>% select(c(1,37,36,3:35))
+selected_measurements_std_summary <- selected_measurements_std_summary %>% summarize_all(funs(mean)) %>% select(c(1,37,36,3:35))
 
-# Rename names of summarized variables with a suffix of "-MEAN"
-names(selected_measurements_summary)[4:69] <- paste(names(selected_measurements_summary[4:69]), "-MEAN", sep = "")
+selected_measurements_mean_summary_melt <- melt(selected_measurements_mean_summary, id=c("activity", "subject_id", "measurement"))
+selected_measurements_std_summary_melt <- melt(selected_measurements_std_summary, id=c("activity", "subject_id", "measurement"))
 
 # View and output final tidy dataset
-View(selected_measurements_summary)
+tidy_measurements <- rbind(selected_measurements_mean_summary_melt, selected_measurements_std_summary_melt)
 
-write.table(selected_measurements_summary, file = "tidy_dataset.txt", row.names = FALSE, sep = "|")
+View(tidy_measurements)
+
+write.table(tidy_measurements, file = "tidy_dataset.txt", row.names = FALSE, sep = "|")
+
+
+
+
